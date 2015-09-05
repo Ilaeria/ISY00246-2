@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            Team schema for Assignment 2 Part 1.
+        </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:element name="team" type="teamType"/>
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            The team must have a section including team details, and 2-20 team members.
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType name="teamType">
+        <xsd:sequence>
+            <xsd:element name="teamDetail" type="teamDetailType"/>
+            <xsd:element name="member" type="memberType" minOccurs="2" maxOccurs="20"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            The team details include the following:
+            1. An alphanumeric id attribute of 4-20 characters.
+            2. The full name of the team.
+            3. A team leader with a name and phone number, and optional email address.
+            4. The number of players, between 2-20 inclusive.
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType name="teamDetailType">
+        <xsd:sequence>
+            <xsd:element name="leader" type="leaderType"/>
+            <xsd:element name="fullname" type="xsd:string"/>
+            <xsd:element name="players" type="playersType" />
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required" type="id"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="leaderType">
+        <xsd:sequence>
+            <xsd:element name="name" type="infoType"/>
+            <xsd:element name="phone" type="infoType"/>
+            <xsd:element name="email" type="infoType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="playersType">
+        <xsd:attribute name="no" use="required">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:integer">
+                    <xsd:minInclusive value="2"/>
+                    <xsd:maxInclusive value="20"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:simpleType name="id">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="4"/>
+            <xsd:maxLength value="10"/>
+            <xsd:pattern value="^[a-zA-Z0-9]*$"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            The member details can appear 2-20 times (inclusive) and include the following:
+            1. The member's name and position.
+            2. The member's mailing address.
+            3. The member's alternative position (optional).
+            4. The fees paid by the member.
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType name="memberType">
+        <xsd:sequence>
+            <xsd:element name="mailAddress" type="infoType"/>
+            <xsd:element name="feesPaid" type="feesPaidType"/>
+            <xsd:element name="altPosition" type="infoType" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" use="required" type="infoType"/>
+        <xsd:attribute name="position" use="required" type="infoType"/>
+    </xsd:complexType>
+
+    <xsd:simpleType name="feesPaidType">
+        <xsd:restriction base="xsd:integer">
+            <xsd:enumeration value="0.0"/>
+            <xsd:enumeration value="10.0"/>
+            <xsd:enumeration value="50.0"/>
+            <xsd:enumeration value="100.0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:annotation>
+        <xsd:documentation xml:lang="en">
+            The infoType type is any non-empty string.
+        </xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType name="infoType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:pattern value=".*[^\s].*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
