@@ -62,7 +62,7 @@
         <xsd:restriction base="xsd:string">
             <xsd:minLength value="4"/>
             <xsd:maxLength value="10"/>
-            <xsd:pattern value="^[a-zA-Z0-9]*$"/>
+            <xsd:pattern value="[a-zA-Z0-9]*"/>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -78,15 +78,15 @@
     <xsd:complexType name="memberType">
         <xsd:sequence>
             <xsd:element name="mailAddress" type="infoType"/>
-            <xsd:element name="feesPaid" type="feesPaidType"/>
             <xsd:element name="altPosition" type="infoType" minOccurs="0"/>
+            <xsd:element name="feesPaid" type="feesPaidType"/>
         </xsd:sequence>
         <xsd:attribute name="name" use="required" type="infoType"/>
         <xsd:attribute name="position" use="required" type="infoType"/>
     </xsd:complexType>
 
     <xsd:simpleType name="feesPaidType">
-        <xsd:restriction base="xsd:integer">
+        <xsd:restriction base="xsd:decimal">
             <xsd:enumeration value="0.0"/>
             <xsd:enumeration value="10.0"/>
             <xsd:enumeration value="50.0"/>
