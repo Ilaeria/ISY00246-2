@@ -26,10 +26,9 @@ public class ProcessXML
         try
         {
             //Set up processing
-            File xml = new File("team.xml");
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(xml);
+            Document doc = builder.parse(args[0]);
             Element root = doc.getDocumentElement();
 
             //Process and print the team details
@@ -90,7 +89,7 @@ public class ProcessXML
             Text leaderPhoneText = (Text) nLeaderPhone.item(0);
 
             //Leader email is optional
-            String emailString = "";
+            String emailString = "no email provided";
             try
             {
                 Element eLeaderEmail = (Element) eLeader.getElementsByTagName("email").item(0);
@@ -100,35 +99,15 @@ public class ProcessXML
             }
             catch (NullPointerException npe)
             {
-                System.out.println("Email fail");
             }
 
             System.out.println();
             System.out.println("Total of " + memberTotal + " team member(s).");
             System.out.println("Team contact " + leaderText.getWholeText() + " "
                     + leaderPhoneText.getWholeText() +", " + emailString);
-
-
-            /*
-            Team details for "The A Team" (code theATeam):
-
-            Players:
-            Jo Player, left half (Fees paid: $100.00)
-                Long Road, Upper Woop Woop West, NSW
-                Alt Position: left wing
-            Peter Player, goal keeper (Fees paid: $0.00)
-                Short Road, Woop Woop, NSW
-            Barry Wilks, back (Fees paid: $100.00)
-                23 Jetty Street, Coffs Jetty, NSW
-                Alt position: left right out
-
-            Total of 3 team member(s).
-            Team contact Barry Wilks 9999 3002, barwil@mail.com
-            */
         }
         catch (SAXException se)
         {
-            se.printStackTrace();
         }
         catch (Exception e)
         {
