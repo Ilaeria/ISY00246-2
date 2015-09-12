@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac9fbbbc-16f9-4a96-bd5e-aa780dc5c489" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Assignment 2 Part 2/Assignment 2 Part 2.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Assignment 2 Part 2/src/com/Part2/ProcessXML.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Assignment 2 Part 2/team.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../Assignment 2 Part 2/team.xsd" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 2/src/com/Part2/ProcessXML.java" afterPath="$PROJECT_DIR$/../Assignment 2 Part 2/src/com/Part2/ProcessXML.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Assignment 2 Part 1.iws" />
