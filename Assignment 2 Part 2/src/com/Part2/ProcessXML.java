@@ -107,9 +107,14 @@ public class ProcessXML
         }
         catch (SAXException se)
         {
+            System.out.println();
+            System.out.println(se);
+            se.printStackTrace();
         }
         catch (Exception e)
         {
+            System.out.println();
+            System.out.println(e);
             e.printStackTrace();
         }
 

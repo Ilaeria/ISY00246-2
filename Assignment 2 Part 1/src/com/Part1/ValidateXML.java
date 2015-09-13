@@ -45,11 +45,13 @@ public class ValidateXML
         {
             System.out.println();
             System.out.println(pce);
+            pce.printStackTrace();
         }
         catch (Exception e)
         {
             System.out.println();
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 }
