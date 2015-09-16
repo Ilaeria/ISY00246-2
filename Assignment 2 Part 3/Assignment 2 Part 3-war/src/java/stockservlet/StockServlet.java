@@ -10,6 +10,7 @@ package stockservlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,27 +28,133 @@ public class StockServlet extends HttpServlet
      * @throws IOException if an I/O error occurs
      */
     
+    private HashMap<String, Stock> data;
+    
+    public void init()
+    {
+        data = new HashMap<String,Stock>();
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException 
     {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try  
-        {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet StockServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet StockServlet at " + request.getContextPath() + "</h1>");
+    response.setContentType("text/html;charset=UTF-8"); 
+    PrintWriter out = response.getWriter();
+    try 
+    {
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Servlet Stocks</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<br/>"); 
+            
+            //Determine which button was clicked
+            String buttonClicked = buttonClick(request);
+            // Now process each button type
+            if (buttonClicked == "Find") 
+            {
+                String code = request.getParameter("code");
+                if (!data.containsKey(code))
+                {
+                    out.println("No such stock in database.<br/>");
+                }
+                else
+                {
+                    out.println("Code: " + code 
+                            + " Full company name: " + data.get(code).getCompany() 
+                            + " Price in cents: "  + data.get(code).getPrice()
+                            + " Web page: " + data.get(code).getUrl()
+                            + "<br/>");
+                }
+            } 
+            else if (buttonClicked == "Delete") 
+            {
+                String code = request.getParameter("code");
+                if (!data.containsKey(code))
+                {
+                    out.println("No such stock in database.<br/>");
+                }
+                else 
+                {
+                    data.remove(code);
+                    out.println("Code: " + code + " removed from database.<br/>");
+                }
+            }
+            else if (buttonClicked == "Add") 
+            {
+                String code = request.getParameter("code");
+                String company = request.getParameter("company");
+                int price = Integer.parseInt(request.getParameter("price"));
+                String url = request.getParameter("url");
+                
+                if (data.containsKey(code))
+                {
+                    out.println("That stock already exists in database.<br/>");
+                }
+                else if (company == "" || company == null || price == 0 || url == "" || url == null)
+                {
+                    out.println("You must provide all stock details when adding.<br/>");
+                }
+                else 
+                {
+                    Stock stock = new Stock(company, price, url);
+                    data.put(code, stock);
+                    out.println("Code: "+ code + " successfully added.<br/>");
+                }
+            } 
+            else if (buttonClicked == "List") 
+            {
+                out.println("Stock list:<br/>");
+                for (String code : data.keySet()) 
+                {
+                    out.println("Code: " + code 
+                            + " Full company name: " + data.get(code).getCompany() 
+                            + " Price in cents: "  + data.get(code).getPrice()
+                            + " Web page: " + data.get(code).getUrl()
+                            + "<br/>");
+                }
+            } 
+            else
+            {
+                out.println("An error has occured.<br/>");
+            }
+                
+            // provide link back to main page
+            out.println("<br/> <a href=\""+request.getContextPath()+"\">Go to home page</a>");
+            
             out.println("</body>");
             out.println("</html>");
         }
+        catch (Exception e)
+        {
+            out.println("An error has occured:<br/>");
+            e.printStackTrace(out);
+        }
+        
         finally
         {
             out.close();
         }
+    }
+    
+    public void destroy() 
+    {
+    }
+    
+    //Check which button was clicked
+    private String buttonClick(HttpServletRequest request) 
+    {
+        if (request.getParameter("Find") != null)
+            return "Find";
+        else if (request.getParameter("Delete") != null)
+            return "Delete";
+        else if (request.getParameter("Add") != null)
+            return "Add";
+        else if (request.getParameter("List") != null)
+            return "List";
+        else
+            return null;
     }
 
     /**
@@ -88,7 +195,7 @@ public class StockServlet extends HttpServlet
     @Override
     public String getServletInfo() 
     {
-        return "Short description";
+        return "Stocks database";
     }
 
 }
