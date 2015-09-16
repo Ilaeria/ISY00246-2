@@ -21,7 +21,7 @@ public class ProcessXML
             System.out.println("XML file must be set in command line arguments.");
             System.exit(-1);
         }
-
+        
         try
         {
             //Set up processing

@@ -11,6 +11,7 @@ package stockservlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
+import java.net.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -67,10 +68,9 @@ public class StockServlet extends HttpServlet
                 else
                 {
                     out.println("Code: " + editCode 
-                            + " Full company name: " + data.get(editCode).getCompany() 
-                            + " Price in cents: "  + data.get(editCode).getPrice()
-                            + " Web page: " + data.get(editCode).getUrl()
-                            + "<br/>");
+                            + " , full company name: " + data.get(editCode).getCompany() 
+                            + " , price in cents: "  + data.get(editCode).getPrice()
+                            + " , web page: " + data.get(editCode).getUrl() +"<br/>");
                 }
             } 
             //Handle the 3 delete cases
@@ -134,14 +134,18 @@ public class StockServlet extends HttpServlet
             } 
             else if (buttonClicked == "List All") 
             {
-                out.println("Stock list:<br/>");
+                out.println("<h2>Stock list:</h2><br/>");
                 for (String listCode : data.keySet()) 
                 {
+                    
                     out.println("Code: " + listCode 
-                            + " Full company name: " + data.get(listCode).getCompany() 
-                            + " Price in cents: "  + data.get(listCode).getPrice()
-                            + " Web page: " + data.get(listCode).getUrl()
-                            + "<br/>");
+                            + " , full company name: " + data.get(listCode).getCompany() 
+                            + " , price in cents: "  + data.get(listCode).getPrice()
+                            + " , web page: " + data.get(listCode).getUrl() +"<br/>");
+                    
+                            //Not returning absolute URL, maybe because of url-pattern mapping?
+                            //String companyURL = data.get(listCode).getUrl();
+                            //+ "<br/> Web page: <a href=\"" + companyURL + "\">Link</a><br/>");  
                 }
             } 
             else
