@@ -50,41 +50,59 @@ public class StockServlet extends HttpServlet
         out.println("<br/>"); 
         out.println("<h1>Stock Database</h1>");
             
+            //Set the different stock code variables
+            String editCode = request.getParameter("editcode");
+            String addCode = request.getParameter("addcode");
+            
             //Determine which button was clicked
             String buttonClicked = buttonClick(request);
-            // Now process each button type
+            
+            //Pprocess each button
             if (buttonClicked == "Find") 
             {
-                String code = request.getParameter("code");
-                if (!data.containsKey(code))
+                if (!data.containsKey(editCode))
                 {
                     out.println("No such stock in database.<br/>");
                 }
                 else
                 {
-                    out.println("Code: " + code 
-                            + " Full company name: " + data.get(code).getCompany() 
-                            + " Price in cents: "  + data.get(code).getPrice()
-                            + " Web page: " + data.get(code).getUrl()
+                    out.println("Code: " + editCode 
+                            + " Full company name: " + data.get(editCode).getCompany() 
+                            + " Price in cents: "  + data.get(editCode).getPrice()
+                            + " Web page: " + data.get(editCode).getUrl()
                             + "<br/>");
                 }
             } 
-            else if (buttonClicked == "Delete") 
+            //Handle the 3 delete cases
+            else if (buttonClicked == "Delete" || buttonClicked == "Yes" || buttonClicked == "No")
             {
-                String code = request.getParameter("code");
-                if (!data.containsKey(code))
+                String deleteCode = editCode;
+                String storedCode = request.getParameter("storedcode");
+                if (buttonClicked == "Delete") //Direct to confirmation page
                 {
-                    out.println("No such stock in database.<br/>");
+                    request.setAttribute("deletecode", deleteCode);
+                    request.getRequestDispatcher("/deletestock.jsp").forward(request, response);
                 }
-                else 
+                else if (buttonClicked == "No") //Changed mind about deleting
                 {
-                    data.remove(code);
-                    out.println("Code: " + code + " removed from database.<br/>");
+                out.println("Delete request for " + storedCode + " cancelled.</br>");
+                }
+                else if (buttonClicked =="Yes") //Confirmed delete
+                {
+                out.println(storedCode);
+                if (!data.containsKey(storedCode))
+                    {
+                        out.println("No such stock in database.<br/>");
+                    }
+                    else 
+                    {
+                        data.remove(storedCode);
+                        out.println("Code: " + storedCode + " removed from database.<br/>");
+                    }
                 }
             }
             else if (buttonClicked == "Add") 
             {
-                String stockCode = request.getParameter("stockcode");
                 String company = request.getParameter("company");
                 String url = request.getParameter("url");
                 
@@ -98,9 +116,8 @@ public class StockServlet extends HttpServlet
                 {
                     out.println("The stock price must be a whole number in cents.<br/>");
                 }
-                out.println(stockCode + company + price + url + "<br/>");
                 
-                if (data.containsKey(stockCode))
+                if (data.containsKey(addCode))
                 {
                     out.println("That stock already exists in database.<br/>");
                 }
@@ -111,25 +128,25 @@ public class StockServlet extends HttpServlet
                 else 
                 {
                     Stock stock = new Stock(company, price, url);
-                    data.put(stockCode, stock);
-                    out.println("Code: " + stockCode + " successfully added.<br/>");
+                    data.put(addCode, stock);
+                    out.println("Code: " + addCode + " successfully added.<br/>");
                 }
             } 
             else if (buttonClicked == "List All") 
             {
                 out.println("Stock list:<br/>");
-                for (String code : data.keySet()) 
+                for (String listCode : data.keySet()) 
                 {
-                    out.println("Code: " + code 
-                            + " Full company name: " + data.get(code).getCompany() 
-                            + " Price in cents: "  + data.get(code).getPrice()
-                            + " Web page: " + data.get(code).getUrl()
+                    out.println("Code: " + listCode 
+                            + " Full company name: " + data.get(listCode).getCompany() 
+                            + " Price in cents: "  + data.get(listCode).getPrice()
+                            + " Web page: " + data.get(listCode).getUrl()
                             + "<br/>");
                 }
             } 
             else
             {
-                out.println("An error has occured.<br/>");
+                out.println(buttonClicked + ": an error has occured.<br/>");
             }
                 
             // provide link back to main page
@@ -165,6 +182,10 @@ public class StockServlet extends HttpServlet
             return "Add";
         else if (request.getParameter("List All") != null)
             return "List All";
+        else if (request.getParameter("No") != null)
+            return "No";
+        else if (request.getParameter("Yes") != null)
+            return "Yes";
         else
             return null;
     }

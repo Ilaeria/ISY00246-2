@@ -7,6 +7,7 @@
     <servlet-mapping>
         <servlet-name>StockServlet</servlet-name>
         <url-pattern>/Stocks</url-pattern>
+        <url-pattern></url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

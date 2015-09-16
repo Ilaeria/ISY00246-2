@@ -9,12 +9,12 @@
         <form action="Stocks" method="post">
             <h2>What would you like to do?</h2>
             Edit or delete an existing stock:<br/>
-            Code: <input type="text" name="code"/>
+            Code: <input type="text" name="editcode"/>
             <input type="submit" name="Find" value="Find"/>
             <input type="submit" name="Delete" value="Delete"/> <br/>
             <br/>
             Add a stock:<br/>
-            Code: <input type="text" name="stockcode"/>
+            Code: <input type="text" name="addcode"/>
             Full company name: <input type="text" name="company"/>
             Price in cents: <input type="text" name="price"/>
             Web page: <input type="text" name="url"/>
