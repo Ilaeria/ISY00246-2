@@ -48,6 +48,7 @@ public class StockServlet extends HttpServlet
         out.println("</head>");
         out.println("<body>");
         out.println("<br/>"); 
+        out.println("<h1>Stock Database</h1>");
             
             //Determine which button was clicked
             String buttonClicked = buttonClick(request);
@@ -83,12 +84,23 @@ public class StockServlet extends HttpServlet
             }
             else if (buttonClicked == "Add") 
             {
-                String code = request.getParameter("code");
+                String stockCode = request.getParameter("stockcode");
                 String company = request.getParameter("company");
-                int price = Integer.parseInt(request.getParameter("price"));
                 String url = request.getParameter("url");
                 
-                if (data.containsKey(code))
+                //Try to parse the price
+                int price = 0;
+                try
+                {
+                    price = Integer.parseInt(request.getParameter("price"));
+                }
+                catch (NumberFormatException e)
+                {
+                    out.println("The stock price must be a whole number in cents.<br/>");
+                }
+                out.println(stockCode + company + price + url + "<br/>");
+                
+                if (data.containsKey(stockCode))
                 {
                     out.println("That stock already exists in database.<br/>");
                 }
@@ -99,11 +111,11 @@ public class StockServlet extends HttpServlet
                 else 
                 {
                     Stock stock = new Stock(company, price, url);
-                    data.put(code, stock);
-                    out.println("Code: "+ code + " successfully added.<br/>");
+                    data.put(stockCode, stock);
+                    out.println("Code: " + stockCode + " successfully added.<br/>");
                 }
             } 
-            else if (buttonClicked == "List") 
+            else if (buttonClicked == "List All") 
             {
                 out.println("Stock list:<br/>");
                 for (String code : data.keySet()) 
@@ -151,8 +163,8 @@ public class StockServlet extends HttpServlet
             return "Delete";
         else if (request.getParameter("Add") != null)
             return "Add";
-        else if (request.getParameter("List") != null)
-            return "List";
+        else if (request.getParameter("List All") != null)
+            return "List All";
         else
             return null;
     }
