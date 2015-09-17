@@ -1,7 +1,7 @@
 /**
  * Created by: Jennifer Doherty
  * Unit: ISY00246 S2 2015
- * Date: 5 September 2015
+ * Date: 17 September 2015
  * Assignment 2 Part 2
  * Processes XML documents. From Lab 8 documentation.
  **/
@@ -21,7 +21,7 @@ public class ProcessXML
             System.out.println("XML file must be set in command line arguments.");
             System.exit(-1);
         }
-        
+
         try
         {
             //Set up processing

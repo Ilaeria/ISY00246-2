@@ -10,6 +10,6 @@
         <h2>Do you really want to delete ${deletecode}?</h2><br/>
         <input type="submit" name="Yes" value="Yes" style="width:80px"/> Delete <br/><br/>
         <input type="submit" name="No" value="No" style="width:80px" href="/index.jsp"/> Go back<br/><br/>
-        <input type="hidden" name="storedcode" value="${deletecode}">
+        <input type="hidden" name="storeddeletecode" value="${deletecode}">
     </form>
 </html>

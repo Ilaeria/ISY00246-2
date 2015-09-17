@@ -1,7 +1,7 @@
 /**
  * Created by: Jennifer Doherty
  * Unit: ISY00246 S2 2015
- * Date: 5 September 2015
+ * Date: 17 September 2015
  * Assignment 2 Part 3
  * Stock servlet. From Lab 10 documentation.
  **/
@@ -58,26 +58,72 @@ public class StockServlet extends HttpServlet
             //Determine which button was clicked
             String buttonClicked = buttonClick(request);
             
-            //Pprocess each button
-            if (buttonClicked == "Find") 
+            //Process each button
+            
+            //Handle the edit cases
+            if (buttonClicked == "Find" || buttonClicked == "Confirm" || buttonClicked == "Cancel") 
             {
-                if (!data.containsKey(editCode))
+                String modifyCode = editCode;
+                String storedEditCode = request.getParameter("storededitcode");
+                
+                if (buttonClicked == "Find") //Direct to edit page
                 {
-                    out.println("No such stock in database.<br/>");
+                    String fullStockInfo = "Code: " + editCode 
+                            + ", full company name: " + data.get(editCode).getCompany() 
+                            + ", price in cents: "  + data.get(editCode).getPrice()
+                            + ", web page: <a href=\"http://" + data.get(editCode).getUrl() 
+                            + "\" target=\"_blank\">" + data.get(editCode).getUrl() + "</a><br/>";
+                    
+                    request.setAttribute("modifycode", modifyCode);
+                    request.setAttribute("fullstockinfo", fullStockInfo);
+                    request.getRequestDispatcher("/editstock.jsp").forward(request, response);
                 }
-                else
+                else if (buttonClicked == "Cancel") //Didn't want to edit
                 {
-                    out.println("Code: " + editCode 
-                            + " , full company name: " + data.get(editCode).getCompany() 
-                            + " , price in cents: "  + data.get(editCode).getPrice()
-                            + " , web page: " + data.get(editCode).getUrl() +"<br/>");
+                    out.println("Edit request for " + storedEditCode + " cancelled.</br>");
                 }
-            } 
-            //Handle the 3 delete cases
+                else if (buttonClicked == "Confirm") //Confirmed edit
+                {
+                    if (!data.containsKey(storedEditCode))
+                    {
+                        out.println("No such stock in database. Note: search is case-sensitive.<br/>");
+                    }
+                    else
+                    {
+                        String company = request.getParameter("company");
+                        String url = request.getParameter("url");
+
+                        //Try to parse the price
+                        int price = 0;
+                        try
+                        {
+                            price = Integer.parseInt(request.getParameter("price"));
+                        }
+                        catch (NumberFormatException e)
+                        {
+                            out.println("The stock price must be a whole number in cents.<br/>");
+                        }
+
+                        if (company == "" || company == null || price == 0 || url == "" || url == null)
+                        {
+                            out.println("You must provide all stock details when adding.<br/>");
+                        }
+                        else 
+                        {
+                            Stock editStock = new Stock(company, price, url);
+                            data.replace(storedEditCode, editStock);
+                            out.println("Code: " + storedEditCode + " successfully edited.<br/>");
+                        }
+                    }
+                }
+            }
+            
+            //Handle the delete cases
             else if (buttonClicked == "Delete" || buttonClicked == "Yes" || buttonClicked == "No")
             {
                 String deleteCode = editCode;
-                String storedCode = request.getParameter("storedcode");
+                String storedDeleteCode = request.getParameter("storeddeletecode");
+
                 if (buttonClicked == "Delete") //Direct to confirmation page
                 {
                     request.setAttribute("deletecode", deleteCode);
@@ -85,19 +131,18 @@ public class StockServlet extends HttpServlet
                 }
                 else if (buttonClicked == "No") //Changed mind about deleting
                 {
-                out.println("Delete request for " + storedCode + " cancelled.</br>");
+                    out.println("Delete request for " + storedDeleteCode + " cancelled.</br>");
                 }
-                else if (buttonClicked =="Yes") //Confirmed delete
+                else if (buttonClicked == "Yes") //Confirmed delete
                 {
-                out.println(storedCode);
-                if (!data.containsKey(storedCode))
+                    if (!data.containsKey(storedDeleteCode))
                     {
-                        out.println("No such stock in database.<br/>");
+                        out.println("No such stock in database. Note: search is case-sensitive.<br/>");
                     }
                     else 
                     {
-                        data.remove(storedCode);
-                        out.println("Code: " + storedCode + " removed from database.<br/>");
+                        data.remove(storedDeleteCode);
+                        out.println("Code: " + storedDeleteCode + " removed from database.<br/>");
                     }
                 }
             }
@@ -139,13 +184,10 @@ public class StockServlet extends HttpServlet
                 {
                     
                     out.println("Code: " + listCode 
-                            + " , full company name: " + data.get(listCode).getCompany() 
-                            + " , price in cents: "  + data.get(listCode).getPrice()
-                            + " , web page: " + data.get(listCode).getUrl() +"<br/>");
-                    
-                            //Not returning absolute URL, maybe because of url-pattern mapping?
-                            //String companyURL = data.get(listCode).getUrl();
-                            //+ "<br/> Web page: <a href=\"" + companyURL + "\">Link</a><br/>");  
+                            + ", full company name: " + data.get(listCode).getCompany() 
+                            + ", price in cents: "  + data.get(listCode).getPrice()
+                            + ", web page: <a href=\"http://" + data.get(listCode).getUrl() 
+                            + "\" target=\"_blank\">" + data.get(listCode).getUrl() + "</a><br/>");  
                 }
             } 
             else
@@ -190,6 +232,10 @@ public class StockServlet extends HttpServlet
             return "No";
         else if (request.getParameter("Yes") != null)
             return "Yes";
+        else if (request.getParameter("Confirm") != null)
+            return "Confirm";
+        else if (request.getParameter("Cancel") != null)
+            return "Cancel";
         else
             return null;
     }

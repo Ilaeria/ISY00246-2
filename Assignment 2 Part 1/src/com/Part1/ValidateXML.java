@@ -1,7 +1,7 @@
 /**
  * Created by: Jennifer Doherty
  * Unit: ISY00246 S2 2015
- * Date: 5 September 2015
+ * Date: 17 September 2015
  * Assignment 2 Part 1
  * Validates XML Schemas using a DOM parser. From Lab 7 documentation.
  **/

@@ -1,3 +1,7 @@
+/**
+ * Simple stock class for a stock market database.
+ **/
+
 package stockservlet;
 
 public class Stock 

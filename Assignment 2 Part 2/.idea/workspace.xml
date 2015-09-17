@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f381cebc-ca43-4319-9ecc-386ba47783e1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/build/web/WEB-INF/classes/stockservlet/StockServlet.class" afterPath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/build/web/WEB-INF/classes/stockservlet/StockServlet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 3/dist/gfdeploy/_Assignment_2_Part_3/Assignment_2_Part_3-war_war/WEB-INF/classes/stockservlet/StockServlet.class" afterPath="$PROJECT_DIR$/../Assignment 2 Part 3/dist/gfdeploy/_Assignment_2_Part_3/Assignment_2_Part_3-war_war/WEB-INF/classes/stockservlet/StockServlet.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/Part2/ProcessXML.java" afterPath="$PROJECT_DIR$/src/com/Part2/ProcessXML.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/src/java/stockservlet/StockServlet.java" afterPath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/src/java/stockservlet/StockServlet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 1/src/com/Part1/ValidateXML.java" afterPath="$PROJECT_DIR$/../Assignment 2 Part 1/src/com/Part1/ValidateXML.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/build/web/deletestock.jsp" afterPath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/build/web/deletestock.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/web/deletestock.jsp" afterPath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/web/deletestock.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 3/dist/gfdeploy/_Assignment_2_Part_3/Assignment_2_Part_3-war_war/deletestock.jsp" afterPath="$PROJECT_DIR$/../Assignment 2 Part 3/dist/gfdeploy/_Assignment_2_Part_3/Assignment_2_Part_3-war_war/deletestock.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/nbproject/private/private.xml" afterPath="$PROJECT_DIR$/../Assignment 2 Part 3/Assignment 2 Part 3-war/nbproject/private/private.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Assignment 2 Part 1/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../Assignment 2 Part 1/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Assignment 2 Part 2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,8 +39,8 @@
           <file leaf-file-name="ProcessXML.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/Part2/ProcessXML.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.4349277">
-                  <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+                <state vertical-scroll-proportion="0.0945495">
+                  <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -470,7 +480,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="28" width="1696" height="1036" extended-state="1" />
+    <frame x="1912" y="28" width="1696" height="1036" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -706,8 +716,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Part2/ProcessXML.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4349277">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0945495">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding />
         </state>
       </provider>
